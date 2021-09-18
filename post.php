@@ -85,10 +85,9 @@
                     }
                 ?>
    
-
-
                 <!-- Comments Form -->
-                <div class="well">
+                <div class="well" style="
+    margin-top: 13px;">
                     <h4>Leave a Comment:</h4>
                     <form action="" role="form" method="post">
 

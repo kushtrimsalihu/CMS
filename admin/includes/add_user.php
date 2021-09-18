@@ -10,7 +10,8 @@ if(isset($_POST['create_user'])){
      $user_image_temp = $_FILES['image']['tmp_name'];
 
     $username = $_POST['username'];
-    $user_email = $_POST['user_email'];
+$user_email = $_POST['user_email'];
+
     // $options = [12];
     $user_password = $_POST['user_password'];
     //$user_password=password_hash($user_password,PASSWORD_BCRYPT);

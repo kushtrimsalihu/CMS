@@ -1,20 +1,20 @@
 <table class="table table-hover table-bordered">
     <thead>
         <tr>
-        <th>Id</th>
-        <th>Author</th>
-        <th>Comment</th>
-        <th>Email</th>
-        <th>Status</th>
-        <th>In Response to</th>
-        <th>Date</th>
-        <th>Approve</th>
-        <th>Unapprove</th>
-        <th>Delete</th>
-    </tr>
+            <th>Id</th>
+            <th>Author</th>
+            <th>Comment</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>In Response to</th>
+            <th>Date</th>
+            <th>Approve</th>
+            <th>Unapprove</th>
+            <th>Delete</th>
+        </tr>
     </thead>
 
-<?php
+    <?php
 
 $query = "SELECT * FROM comments ORDER BY comment_id DESC";
 $select_comments = mysqli_query($connection,$query);
@@ -29,14 +29,14 @@ while ($row = mysqli_fetch_assoc($select_comments)) {
    $comment_date = $row['comment_date'];
 ?>
 
-<tbody>
-    <tr>
-        <td><?php echo $comment_id; ?></td>
-        <td><?php echo $comment_author; ?></td>
-        <td><?php echo $comment_content; ?></td>
-        <td><?php echo $comment_email; ?></td>
+    <tbody>
+        <tr>
+            <td><?php echo $comment_id; ?></td>
+            <td><?php echo $comment_author; ?></td>
+            <td><?php echo $comment_content; ?></td>
+            <td><?php echo $comment_email; ?></td>
 
-        <?php
+            <?php
             //  $query = "SELECT * FROM comments WHERE comment_id = {$comment_id}";
             //  $select_comment_id = mysqli_query($connection,$query);
 
@@ -44,12 +44,12 @@ while ($row = mysqli_fetch_assoc($select_comments)) {
             //       $comment_id = $row['comment_id'];
             //       $cat_title = $row['cat_title'];
             // } 
-        ?> 
+        ?>
 
-        <td><?php echo $comment_status; ?></td>
+            <td><?php echo $comment_status; ?></td>
 
 
-       <?php
+            <?php
        $query = "SELECT * FROM posts WHERE post_id = $comment_post_id";
        $select_post_id_query = mysqli_query($connection,$query);
        while ($row = mysqli_fetch_assoc($select_post_id_query)) {
@@ -59,19 +59,20 @@ while ($row = mysqli_fetch_assoc($select_comments)) {
            
        }
        ?>
-       
-       
-        <td><?php echo $comment_date; ?></td>
-
-        <td><?php echo "<a class='btn btn-success' href='comments.php?approve={$comment_id}'>Approve</a>"; ?></td>
-        <td><?php echo "<a class='btn btn-warning' href='comments.php?unapprove={$comment_id}'>Unapprove</a>"; ?></td>
-        <td><?php echo "<a class='btn btn-danger' href='comments.php?delete={$comment_id}'>Delete</a>"; ?></td>
-    </tr>
 
 
-<?php }?>
+            <td><?php echo $comment_date; ?></td>
 
-</tbody>
+            <td><?php echo "<a class='btn btn-success' href='comments.php?approve={$comment_id}'>Approve</a>"; ?></td>
+            <td><?php echo "<a class='btn btn-warning' href='comments.php?unapprove={$comment_id}'>Unapprove</a>"; ?>
+            </td>
+            <td><?php echo "<a class='btn btn-danger' href='comments.php?delete={$comment_id}'>Delete</a>"; ?></td>
+        </tr>
+
+
+        <?php }?>
+
+    </tbody>
 </table>
 
 

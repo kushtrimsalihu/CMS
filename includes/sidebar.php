@@ -20,6 +20,32 @@
     </div>
 
 
+    <!-- Login -->
+    <div class="well">
+        <h4>Login</h4>
+        <form action="includes/login.php" method="post">
+            <div class="form-group">
+                <input name="username" type="text" class="form-control" placeholder="Enter Username">
+            </div>
+
+            <div class="input-group">
+                <input name="password" type="password" class="form-control" placeholder="Enter Password">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" name="login" type="submit">Submit
+                    </button>
+                </span>
+            </div>
+
+        </form><!-- login form-->
+        <!-- /.input-group -->
+    </div>
+
+
+
+
+
+
+
 
 
     <!-- Blog Categories Well -->
@@ -45,9 +71,8 @@ $select_categories_sidebar = mysqli_query($connection,$query);
     echo "<li><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
     
     }
+                ?>
 
-
-            ?>
                 </ul>
             </div>
             <!-- /.col-lg-6 -->
@@ -60,6 +85,6 @@ $select_categories_sidebar = mysqli_query($connection,$query);
 
 
     <!-- Side Widget Well -->
-   <?php include "widget.php"; ?>
+    <?php include "widget.php"; ?>
 
 </div>

@@ -1,23 +1,24 @@
 <table class="table table-hover table-bordered">
     <thead>
         <tr>
-        <th>Id</th>
-        <th>Author</th>
-        <th>Title</th>
-        <th>Category</th>
-        <th>Status</th>
-        <th>Image</th>
-        <th>Tags</th>
-        <th>Comments</th>
-        <th>Date</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
+            <th>Id</th>
+            <th>Author</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Image</th>
+            <th>Tags</th>
+            <th>Comments</th>
+            <th>Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
     </thead>
 
-<?php
+    <?php
 
 $query = "SELECT * From posts";
+
 $select_all_posts = mysqli_query($connection,$query);
 
 while ($row = mysqli_fetch_assoc($select_all_posts)) {
@@ -32,13 +33,13 @@ while ($row = mysqli_fetch_assoc($select_all_posts)) {
    $post_date = $row['post_date'];
 ?>
 
-<tbody>
-    <tr>
-        <td><?php echo $post_id; ?></td>
-        <td><?php echo $post_author; ?></td>
-        <td><?php echo $post_title; ?></td>
+    <tbody>
+        <tr>
+            <td><?php echo $post_id; ?></td>
+            <td><?php echo $post_author; ?></td>
+            <td><?php echo $post_title; ?></td>
 
-        <?php
+            <?php
              $query = "SELECT * FROM categories WHERE cat_id = {$post_category}";
              $select_categories_id = mysqli_query($connection,$query);
 
@@ -48,22 +49,22 @@ while ($row = mysqli_fetch_assoc($select_all_posts)) {
             } 
         ?>
 
-        <td><?php echo $cat_title; ?></td>
+            <td><?php echo $cat_title; ?></td>
 
 
-        <td><?php echo $post_status; ?></td>
-        <td><?php echo "<img width='100' src='../images/$post_image'>"; ?></td>
-        <td><?php echo $post_tags; ?></td>
-        <td><?php echo $post_comments; ?></td>
-        <td><?php echo $post_date; ?></td>
-        <td><?php echo "<a class='btn btn-info' href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a>"; ?></td>
-        <td><?php echo "<a class='btn btn-danger' href='posts.php?delete={$post_id}'>Delete</a>"; ?></td>
-    </tr>
+            <td><?php echo $post_status; ?></td>
+            <td><?php echo "<img width='100' src='../images/$post_image'>"; ?></td>
+            <td><?php echo $post_tags; ?></td>
+            <td><?php echo $post_comments; ?></td>
+            <td><?php echo $post_date; ?></td>
+            <td><?php echo "<a class='btn btn-info' href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a>"; ?></td>
+            <td><?php echo "<a class='btn btn-danger' href='posts.php?delete={$post_id}'>Delete</a>"; ?></td>
+        </tr>
 
 
-<?php }?>
+        <?php }?>
 
-</tbody>
+    </tbody>
 </table>
 
 <?php

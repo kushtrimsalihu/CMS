@@ -100,7 +100,6 @@ header("location: users.php");
 }
 
 
-
 if(isset($_GET['delete'])){
 $the_user_id = $_GET['delete'];
 

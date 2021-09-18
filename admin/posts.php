@@ -15,7 +15,7 @@
 
                 <h1 class="page-header">
                         Welcome to Admin
-                        <small>Author</small>
+                        <small><?php echo $_SESSION['username']; ?></small>
                     </h1>
                 <?php
 
@@ -33,9 +33,7 @@
                         case 'edit_post':
                             include "includes/edit_post.php";
                             break;
-                            case 'value':
-                                # code...
-                                break;
+                          
 
                  default:
                  include "includes/view_all_posts.php";
