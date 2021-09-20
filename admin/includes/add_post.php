@@ -1,5 +1,7 @@
 <?php
 if(isset($_POST['create_post'])){
+   
+ 
 
     $post_title = $_POST['title'];
     $post_author = $_POST['author'];
@@ -23,12 +25,12 @@ if(isset($_POST['create_post'])){
 
 
     $create_post_query = mysqli_query($connection,$query);
-
-
+  
+   
   confirm($create_post_query);
+  $the_post_id = mysqli_insert_id($connection);
 
-
-
+  echo "<div class='alert alert-success'>Post Added. <a href='../post.php?p_id={$the_post_id}'>View Post</a> or <a href='posts.php?source=edit_post&p_id={$the_post_id}'>Edit More Post</a></div>";
 }
 
 ?>
@@ -46,7 +48,7 @@ if(isset($_POST['create_post'])){
     
 <div class="form-group">
 
-<select class="form-selecct form-select-lg" name="post_category" id="post_category">
+<select class="form-select form-select-lg" name="post_category" id="post_category">
 <?php 
       $query = "SELECT * FROM categories";
       $select_categories = mysqli_query($connection,$query);
@@ -71,9 +73,13 @@ if(isset($_POST['create_post'])){
     </div>
 
     <div class="form-group">
-        <label for="post_status">Post Status</label>
-        <input type="text" class="form-control" name="post_status">
-    </div>
+        <label for="post_status">Post Status</label> <br>
+        <select name="post_status" id="">
+        <option value="draft">Select Options</option>
+            <option value="published">Publish</option>
+            <option value="draft">Draft</option>
+        </select>
+      </div>
 
     <div class="form-group">
         <label for="post_image">Post Image</label>
@@ -88,7 +94,7 @@ if(isset($_POST['create_post'])){
 
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea class="form-control" name="post_content" id="" cols="30" rows="10">
+        <textarea class="form-control" name="post_content" id="body" cols="30" rows="10">
     </textarea>
     </div>
 

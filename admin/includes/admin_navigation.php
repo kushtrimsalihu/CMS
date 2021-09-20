@@ -15,7 +15,7 @@
                 <li><a href="../index.php">HOME SITE</a></li>
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b
+ <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $_SESSION['firstname']; ?> <?php echo $_SESSION['lastname']; ?><b
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>

@@ -5,6 +5,7 @@
 <!-- /#wrapper -->
 
 <!-- jQuery -->
+<script src="js/script.js"></script>
 <script src="js/jquery.js"></script>
 
 <!-- Bootstrap Core JavaScript -->

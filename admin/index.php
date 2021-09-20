@@ -33,7 +33,7 @@
                                     <i class="fa fa-file-text fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
- <?php
+                                    <?php
 $query = "SELECT * FROM posts";
 $select_all_posts = mysqli_query($connection, $query);
 $post_count = mysqli_num_rows($select_all_posts);
@@ -61,7 +61,7 @@ echo "<div class='huge'>{$post_count}</div>";
                                 </div>
                                 <div class="col-xs-9 text-right">
 
- <?php
+                                    <?php
 $query = "SELECT * FROM comments";
 $select_all_comments = mysqli_query($connection, $query);
 $comment_count = mysqli_num_rows($select_all_comments);
@@ -90,7 +90,7 @@ echo "<div class='huge'>{$comment_count}</div>";
                                     <i class="fa fa-user fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-<?php
+                                    <?php
 $query = "SELECT * FROM users";
 $select_all_users = mysqli_query($connection, $query);
 $users_count = mysqli_num_rows($select_all_users);
@@ -118,7 +118,7 @@ echo "<div class='huge'>{$users_count}</div>";
                                     <i class="fa fa-list fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-<?php
+                                    <?php
 $query = "SELECT * FROM categories";
 $select_all_categories = mysqli_query($connection, $query);
 $categories_count = mysqli_num_rows($select_all_categories);
@@ -140,8 +140,73 @@ echo "<div class='huge'>{$categories_count}</div>";
                     </div>
                 </div>
             </div>
+            <!-- /.row -->
+
+            <?php
+            $query = "SELECT * FROM posts WHERE post_status = 'published'";
+            $select_all_published_posts = mysqli_query($connection,$query);
+            $post_published_count = mysqli_num_rows($select_all_published_posts);
 
 
+            $query = "SELECT * FROM posts WHERE post_status = 'draft'";
+            $select_all_draft_posts = mysqli_query($connection,$query);
+            $post_draft_count = mysqli_num_rows($select_all_draft_posts);
+            
+            $query = "SELECT * FROM comments WHERE comment_status = 'unapproved'";
+            $unnaproved_comments = mysqli_query($connection,$query);
+            $unnaproved_comments_count = mysqli_num_rows($unnaproved_comments);
+            
+            $query = "SELECT * FROM users WHERE user_role = 'subscriber'";
+            $select_all_subscriber = mysqli_query($connection,$query);
+            $subscriber_count = mysqli_num_rows($select_all_subscriber);
+            
+            ?>
+
+
+
+            <div class="row">
+
+                <script type="text/javascript">
+                google.charts.load('current', {
+                    'packages': ['bar']
+                });
+                google.charts.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                        ['Data', 'Count'],
+                        <?php
+$elements_text = ['All Posts','Active Posts','Draft Posts',
+ 'Comments','Pending Comments' ,'Users','Subscribers','Categories'];
+$elements_count = [$post_count,$post_published_count, $post_draft_count,
+ $comment_count,$unnaproved_comments_count,
+ $users_count,$subscriber_count, $categories_count];
+
+
+for ($i = 0; $i < 8; $i++) {
+    echo "['{$elements_text[$i]}'" . "," . "{$elements_count[$i]}],";
+
+}
+
+?>
+                    ]);
+
+                    var options = {
+                        chart: {
+                            title: 'Aktiviteti',
+                            subtitle: '',
+                        }
+                    };
+
+                    var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                }
+                </script>
+                <div id="columnchart_material" style="width: 'auto'; height: 500px;"></div>
+
+
+            </div>
 
 
 
