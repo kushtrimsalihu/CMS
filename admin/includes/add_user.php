@@ -13,7 +13,7 @@ if (isset($_POST['create_user'])) {
         $user_email = $_POST['user_email'];
 
         $user_password = $_POST['user_password'];
-        $user_password = password_hash($user_password, PASSWORD_BCRYPT);
+        //$user_hashed = password_hash($user_password, PASSWORD_BCRYPT);
 
         move_uploaded_file($user_image_temp, "../user_images/$user_image");
 

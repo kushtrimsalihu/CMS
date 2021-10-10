@@ -64,7 +64,7 @@ while ($row = mysqli_fetch_assoc($select_users)) {
         <td class='text-center'><?php echo "<a class='btn btn-success' href='users.php?change_to_admin=$user_id'>Admin</a>"; ?></td>
         <td class='text-center'><?php echo "<a class='btn btn-warning' href='users.php?change_to_sub=$user_id'>Subscriber</a>"; ?></td>
         <td class='text-center'><?php echo "<a class='btn btn-info' href='users.php?source=edit_user&edit_user=$user_id'>Edit</a>"; ?></td>
-        <td class='text-center'><?php echo "<a class='btn btn-danger' href='users.php?delete=$user_id'>Delete</a>"; ?></td>
+        <td class='text-center'><?php echo "<a onClick=\"javascript: return confirm('A jeni i sigurt se deshironi ta fshini kete user?'); \" class='btn btn-danger' href='users.php?delete=$user_id'>Delete</a>"; ?></td>
     </tr>
 
 

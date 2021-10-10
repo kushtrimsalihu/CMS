@@ -143,24 +143,23 @@ echo "<div class='huge'>{$categories_count}</div>";
             <!-- /.row -->
 
             <?php
-            $query = "SELECT * FROM posts WHERE post_status = 'published'";
-            $select_all_published_posts = mysqli_query($connection,$query);
-            $post_published_count = mysqli_num_rows($select_all_published_posts);
+$query = "SELECT * FROM posts WHERE post_status = 'published'";
+$select_all_published_posts = mysqli_query($connection, $query);
+$post_published_count = mysqli_num_rows($select_all_published_posts);
 
+$query = "SELECT * FROM posts WHERE post_status = 'draft'";
+$select_all_draft_posts = mysqli_query($connection, $query);
+$post_draft_count = mysqli_num_rows($select_all_draft_posts);
 
-            $query = "SELECT * FROM posts WHERE post_status = 'draft'";
-            $select_all_draft_posts = mysqli_query($connection,$query);
-            $post_draft_count = mysqli_num_rows($select_all_draft_posts);
-            
-            $query = "SELECT * FROM comments WHERE comment_status = 'unapproved'";
-            $unnaproved_comments = mysqli_query($connection,$query);
-            $unnaproved_comments_count = mysqli_num_rows($unnaproved_comments);
-            
-            $query = "SELECT * FROM users WHERE user_role = 'subscriber'";
-            $select_all_subscriber = mysqli_query($connection,$query);
-            $subscriber_count = mysqli_num_rows($select_all_subscriber);
-            
-            ?>
+$query = "SELECT * FROM comments WHERE comment_status = 'unapproved'";
+$unnaproved_comments = mysqli_query($connection, $query);
+$unnaproved_comments_count = mysqli_num_rows($unnaproved_comments);
+
+$query = "SELECT * FROM users WHERE user_role = 'subscriber'";
+$select_all_subscriber = mysqli_query($connection, $query);
+$subscriber_count = mysqli_num_rows($select_all_subscriber);
+
+?>
 
 
 
@@ -176,12 +175,11 @@ echo "<div class='huge'>{$categories_count}</div>";
                     var data = google.visualization.arrayToDataTable([
                         ['Data', 'Count'],
                         <?php
-$elements_text = ['All Posts','Active Posts','Draft Posts',
- 'Comments','Pending Comments' ,'Users','Subscribers','Categories'];
-$elements_count = [$post_count,$post_published_count, $post_draft_count,
- $comment_count,$unnaproved_comments_count,
- $users_count,$subscriber_count, $categories_count];
-
+$elements_text = ['All Posts', 'Active Posts', 'Draft Posts',
+    'Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories'];
+$elements_count = [$post_count, $post_published_count, $post_draft_count,
+    $comment_count, $unnaproved_comments_count,
+    $users_count, $subscriber_count, $categories_count];
 
 for ($i = 0; $i < 8; $i++) {
     echo "['{$elements_text[$i]}'" . "," . "{$elements_count[$i]}],";

@@ -17,10 +17,16 @@
 
             if(isset($_GET['p_id'])){
 
-                $the_post_id = $_GET['p_id'];
-            }
+              $the_post_id = $_GET['p_id'];
+            
 
+            //How many times is viewed
+            $view_query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = $the_post_id ";
+            $send_query = mysqli_query($connection,$view_query);
 
+                if(!$send_query){
+                    die("QUERY FAILED " . mysqli_error($connection));
+                }
 
             $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
             $select_all_posts_query = mysqli_query($connection,$query);
@@ -55,7 +61,15 @@
             <p><?php echo $post_content; ?></p>
           
 
-<?php  } ?>
+            <?php  }
+        
+        }else {
+header("Location: index.php");
+        }
+        
+        
+        
+        ?>
 
 
 

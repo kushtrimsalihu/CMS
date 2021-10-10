@@ -29,7 +29,6 @@ if (isset($_POST['edit_user'])) {
 
     $username = $_POST['username'];
     $user_email = $_POST['user_email'];
-    // $options = [12];
     $user_password = $_POST['user_password'];
     //$user_password=password_hash($user_password,PASSWORD_BCRYPT);
 
@@ -47,18 +46,32 @@ if (isset($_POST['edit_user'])) {
 
     confirm($create_user_query);
 
-    $query = "UPDATE users SET ";
-    $query .= "user_image = '{$user_image}', ";
-    $query .= "user_firstname = '{$user_firstname}', ";
-    $query .= "user_lastname='{$user_lastname}', ";
-    $query .= "user_role = '{$user_role}', ";
-    $query .= "username = '{$username}', ";
-    $query .= "user_email = '{$user_email}', ";
-    $query .= "user_password = '{$user_password}' ";
-    $query .= "WHERE user_id = {$the_user_id} ";
+    
 
-    $update_user = mysqli_query($connection, $query);
-    confirm($update_user);
+    if (!empty($user_password) && !empty($username)) {
+      
+       // $hashed_password = crypt($user_password, $salt);
+        $hashed_password = password_hash($user_password,PASSWORD_BCRYPT);
+
+        $query = "UPDATE users SET ";
+        $query .= "user_image = '{$user_image}', ";
+        $query .= "user_firstname = '{$user_firstname}', ";
+        $query .= "user_lastname='{$user_lastname}', ";
+        $query .= "user_role = '{$user_role}', ";
+        $query .= "username = '{$username}', ";
+        $query .= "user_email = '{$user_email}', ";
+        $query .= "user_password = '{$hashed_password}' ";
+        $query .= "WHERE user_id = {$the_user_id} ";
+
+        $update_user = mysqli_query($connection, $query);
+        confirm($update_user);
+
+        $message = "<div class='alert alert-success'>User Updated. <a href='users.php'>View Users</a></div>";
+    } else {
+        $message = "<div class='alert alert-danger'>Username and Password cannot be empty !!</div>";
+    }
+} else {
+    $message = "";
 }
 
 ?>
@@ -67,6 +80,8 @@ if (isset($_POST['edit_user'])) {
 
 
 <form action="" method="post" enctype="multipart/form-data">
+
+    <?php echo $message; ?>
 
     <div class="form-group">
         <label for="post_image">Image</label>
@@ -90,14 +105,14 @@ if (isset($_POST['edit_user'])) {
     <div class="form-group">
 
         <select class="form-select form-select-lg" name="user_role" id="user_role">
-            <option value="subscriber"><?php echo $user_role; ?></option>
+            <option value="<?php echo $user_role; ?>"><?php echo $user_role; ?></option>
             <?php
-if ($user_role == 'admin') {
-    echo "<option value='subscriber'>subscriber</option>";
-} else {
-    echo "<option value='admin'>admin</option>";
-}
-?>
+        if ($user_role == 'admin') {
+            echo "<option value='subscriber'>subscriber</option>";
+        } else {
+            echo "<option value='admin'>admin</option>";
+        }
+        ?>
 
         </select>
     </div>
